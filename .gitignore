@@ -1,0 +1,6 @@
+*.csv
+*.txt
+*.json
+creds.py
+*__pycache__*
+*.pyc
