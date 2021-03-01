@@ -191,7 +191,7 @@ class Mlcw(commands.Cog):
 			clan_tag = creds.clan_tag
 			name = creds.clan_name
 		week = args[0]
-
+		empty = True
 		values = ts.loadRoster(week, DASHBOARD, service)
 		mia = f'```\n'
 		player = None
@@ -199,8 +199,10 @@ class Mlcw(commands.Cog):
 		for val in values:
 			player = await self.client.coc.get_player(val[0])
 			if not player.clan is None and player.clan.tag != clan_tag:
+				empty = False
 				mia += f'\n  {template.format(*val)}'
-
+		if empty:
+			mia += "\n No players missing"
 		em = discord.Embed(title = f"- Missing Week {week[1:]} players in {name}", description = mia+'\n```', color = 0x1ef686)
 		await ctx.send(embed = em)
 
