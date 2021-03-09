@@ -198,7 +198,7 @@ class Mlcw(commands.Cog):
 		template = '{2:5} {0:12} {1:21}'
 		for val in values:
 			player = await self.client.coc.get_player(val[0])
-			if not player.clan is None and player.clan.tag != clan_tag:
+			if player.clan is None or player.clan.tag != clan_tag:
 				empty = False
 				mia += f'\n  {template.format(*val)}'
 		if empty:
